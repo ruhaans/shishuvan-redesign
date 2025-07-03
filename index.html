@@ -727,10 +727,40 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 
-.card.focused {
+@media (min-width: 768px) {
+  .card {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  /* Show only focused card */
+  .card.focused {
     opacity: 1;
-    z-index: 20;
+    pointer-events: auto;
+  }
 }
+
+@keyframes petalWiggle {
+  0%, 100% {
+    transform: rotate(0deg) scale(1);
+  }
+  30% {
+    transform: rotate(1.5deg) scale(1.02);
+  }
+  70% {
+    transform: rotate(-1.5deg) scale(1.02);
+  }
+}
+
+/* Apply wiggle only on desktop and only before hover */
+@media (min-width: 768px) {
+  .petal-group:not(.active):not(.dimmed) .petal {
+    animation: petalWiggle 3s ease-in-out infinite;
+    transform-origin: center;
+  }
+}
+
 
 
     .group:hover {
